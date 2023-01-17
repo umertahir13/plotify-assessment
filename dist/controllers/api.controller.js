@@ -8,13 +8,13 @@ const apiSuccess = (res, result, message = "success") => {
         errors: []
     });
 };
-const apiError = (res, message = "Unable to process request", result = null, err, errorCode = 400) => {
-    console.log(err);
+const apiError = (res, message = "Unable to process request", result, err, errorCode = 400) => {
+    // console.log(err);
     res.status(errorCode).json({
         error: true,
         message: message,
         data: result,
-        errors: [err.parent ? err.parent.code : err || null]
+        errors: [err ? err.parent ? err.parent.code : null || err : err || null]
     });
 };
 exports.default = {

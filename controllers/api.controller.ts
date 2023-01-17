@@ -7,13 +7,14 @@ const apiSuccess = (res:any , result:any, message = "success") => {
     });
 }
 
-const apiError = (res: any, message = "Unable to process request", result = null, err:any, errorCode = 400) => {
-    console.log(err);
+const apiError = (res: any, message = "Unable to process request", result?:null, err?:any, errorCode = 400) => {
+    // console.log(err);
     res.status(errorCode).json({
         error: true,
         message: message,
         data: result,
-        errors: [err.parent ? err.parent.code : err || null]
+        errors: [err ? err.parent ? err.parent.code :null || err : err || null]
+
     });
 }
 
